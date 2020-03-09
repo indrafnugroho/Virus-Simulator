@@ -1,4 +1,5 @@
 ﻿using System;
+using ReadFile;
 
 namespace CoronaSimulation
 {
@@ -8,6 +9,7 @@ namespace CoronaSimulation
         {
             Console.Write("Input Total Days Infected: ");
             int time = Convert.ToInt32(Console.ReadLine());
+            ReadFile.ReadFromFile.Read();
 
             Town A = new Town(1000);
             Town B = new Town(5000);
