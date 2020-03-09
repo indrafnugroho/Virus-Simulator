@@ -4,20 +4,39 @@ namespace CoronaSimulation
 {
     class Program
     {
-        double Gamma = 0.25;
+        
         public static void Main()
         {
             Console.Write("Input Total Days Infected: ");
-            int T = Convert.ToInt32(Console.ReadLine());
+            int time = Convert.ToInt32(Console.ReadLine());
 
-
-            
-            Console.WriteLine("Hello World!");
+            // Console.WriteLine("Hello World!");
         }
 
-        public double InfectedPopulation (int Population, int T)
+    }
+
+    class Town
+    {
+        double gamma = 0.25;
+
+        private int year { get; set; }
+        private int population { get; set; }
+
+        Town(int y, int p)
         {
-
+            year = y;
+            population = p;
         }
+
+        public double infectedPopulation(this int population, int time) //Logistic Func I
+        {
+            return ((double) population / (1 + Math.Pow(Math.Exp(population - 1), (-1) * gamma * time)));
+        }
+
+        public double virusSpread(double I, double Tr) //S
+        {
+            return (I * Tr);
+        }
+
     }
 }
