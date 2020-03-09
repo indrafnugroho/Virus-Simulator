@@ -4,27 +4,28 @@ namespace CoronaSimulation
 {
     public class Program
     {
-        
         public static void Main()
         {
             Console.Write("Input Total Days Infected: ");
             int time = Convert.ToInt32(Console.ReadLine());
 
-            // Console.WriteLine("Hello World!");
+            Town A = new Town(1000);
+            Town B = new Town(5000);
+            Town C = new Town(1000);
+            Town D = new Town(1000);
         }
-
     }
 
     public class Town
     {
         double gamma = 0.25;
 
-        private int year { get; set; }
+        private int day { get; set; }
         private int population { get; set; }
 
-        Town(int y, int p)
+        Town(int p)
         {
-            year = y;
+            day = 0;
             population = p;
         }
 
