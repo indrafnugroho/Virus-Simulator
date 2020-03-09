@@ -2,7 +2,7 @@
 
 namespace CoronaSimulation
 {
-    class Program
+    public class Program
     {
         
         public static void Main()
@@ -15,7 +15,7 @@ namespace CoronaSimulation
 
     }
 
-    class Town
+    public class Town
     {
         double gamma = 0.25;
 
@@ -28,7 +28,7 @@ namespace CoronaSimulation
             population = p;
         }
 
-        public double infectedPopulation(this int population, int time) //Logistic Func I
+        public double infectedPopulation(int time) //Logistic Func I
         {
             return ((double) population / (1 + Math.Pow(Math.Exp(population - 1), (-1) * gamma * time)));
         }
