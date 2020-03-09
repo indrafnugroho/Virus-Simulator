@@ -1,55 +1,62 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace ReadFile
 {
     class ReadFromFile
     {
+        public static List<Tuple<char,char,double>> GraphData = new List<Tuple<char, char, double>>();
+        public static List<Tuple<char,double>> EdgeData = new List<Tuple<char, double>>();
+
         public static void Read()
         {
             string[] files1 = System.IO.File.ReadAllLines(@"..\..\..\text1.txt");
             string[] files2 = System.IO.File.ReadAllLines(@"..\..\..\text2.txt");
 
-
-            // System.Console.WriteLine("Contents of text1.txt = ");
-            // foreach (string line1 in files1)
-            // {
-            //     Console.WriteLine(line1);
-            // }
-
             Console.WriteLine("\nIni adalah File 1");
             int nEdge = Convert.ToInt32(files1[0]);
             Console.WriteLine($"ini adalah banyaknya edge : {nEdge}");
 
-            for (int i = 1; i < nEdge; i++){
+            for (int i = 1; i <= nEdge; i++){
                 string[] edges = files1[i].Split(' ');
-                foreach (string edge in edges){
-                    Console.WriteLine(edge);
+                for (int j = 0; j < edges.Length; j++)
+                {
+                    //Extract Data <From, To, Tr(From, To)>
+                    if(j%3==2 )
+                    {
+                        ReadFromFile.GraphData.Add(new Tuple<char, char, double>(
+                            Convert.ToChar(edges[j-2]),
+                            Convert.ToChar(edges[j-1]),
+                            double.Parse(edges[j], System.Globalization.CultureInfo.InvariantCulture) //replacing separator '.' with ','
+                            ));
+                    }
                 }
             }
 
-            // System.Console.WriteLine("Contents of text2.txt = ");
-            // foreach (string line2 in files2)
-            // {
-            //     Console.WriteLine(line2);
-            // }
 
             Console.WriteLine("\nIni adalah File 2");
             string[] getnNode = files2[0].Split(' ');
             int nNode = Convert.ToInt32(getnNode[0]);
             var source = getnNode[1];
 
-            System.Console.WriteLine($"ini adalah banyaknya node : {nNode}");
-            System.Console.WriteLine($"ini adalah source-nya : {source}");
+            Console.WriteLine($"ini adalah source-nya : {source}");
+            Console.WriteLine($"ini adalah banyaknya node : {nNode}");
 
-            for (int i = 1; i < nNode; i++){
+            for (int i = 1; i <= nNode; i++){
                 string[] nodes = files2[i].Split(' ');
-                foreach (string node in nodes){
-                    Console.WriteLine(node);
+                for (int j = 0; j < nodes.Length; j++)
+                {
+                    //extract data <Town, P(A)>
+                    if (j % 2 == 1)
+                    {
+                        ReadFromFile.EdgeData.Add(new Tuple<char, double>(
+                            Convert.ToChar(nodes[j - 1]),
+                            Convert.ToDouble(nodes[j])
+                            ));
+                    }
                 }
             }
-
-            // // Keep the console window open in debug mode.
-            // Console.WriteLine("Press any key to exit.");
-            // System.Console.ReadKey();
         }
     }
 }
