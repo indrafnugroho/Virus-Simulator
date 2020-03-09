@@ -9,15 +9,15 @@ namespace ReadFile
             string[] files2 = System.IO.File.ReadAllLines(@"..\..\..\text2.txt");
 
 
-            System.Console.WriteLine("Contents of text1.txt = ");
-            foreach (string line1 in files1)
-            {
-                Console.WriteLine(line1);
-            }
+            // System.Console.WriteLine("Contents of text1.txt = ");
+            // foreach (string line1 in files1)
+            // {
+            //     Console.WriteLine(line1);
+            // }
 
             Console.WriteLine("\nIni adalah File 1");
             int nEdge = Convert.ToInt32(files1[0]);
-            Console.WriteLine(nEdge);
+            Console.WriteLine($"ini adalah banyaknya edge : {nEdge}");
 
             for (int i = 1; i < nEdge; i++){
                 string[] edges = files1[i].Split(' ');
@@ -26,18 +26,19 @@ namespace ReadFile
                 }
             }
 
-            System.Console.WriteLine("Contents of text2.txt = ");
-            foreach (string line2 in files2)
-            {
-                Console.WriteLine(line2);
-            }
+            // System.Console.WriteLine("Contents of text2.txt = ");
+            // foreach (string line2 in files2)
+            // {
+            //     Console.WriteLine(line2);
+            // }
 
             Console.WriteLine("\nIni adalah File 2");
-
             string[] getnNode = files2[0].Split(' ');
             int nNode = Convert.ToInt32(getnNode[0]);
             var source = getnNode[1];
 
+            System.Console.WriteLine($"ini adalah banyaknya node : {nNode}");
+            System.Console.WriteLine($"ini adalah source-nya : {source}");
 
             for (int i = 1; i < nNode; i++){
                 string[] nodes = files2[i].Split(' ');
@@ -45,7 +46,6 @@ namespace ReadFile
                     Console.WriteLine(node);
                 }
             }
-
 
             // // Keep the console window open in debug mode.
             // Console.WriteLine("Press any key to exit.");
