@@ -12,8 +12,8 @@ namespace ReadFile
     }
     class ReadFromFile
     {
-        public static List<Tuple<char, char, double>> GraphData = new List<Tuple<char, char, double>>();
-        public static List<Tuple<char, double>> EdgeData = new List<Tuple<char, double>>();
+        public static List<Tuple<char, char, double>> EdgeData = new List<Tuple<char, char, double>>();
+        public static List<Tuple<char, int>> GraphData = new List<Tuple<char, int>>();
 
         public static void Read()
         {
@@ -31,7 +31,7 @@ namespace ReadFile
                     //Extract Data <From, To, Tr(From, To)>
                     if(j%3==2 )
                     {
-                        ReadFromFile.GraphData.Add(new Tuple<char, char, double>(
+                        ReadFromFile.EdgeData.Add(new Tuple<char, char, double>(
                             Convert.ToChar(edges[j-2]),
                             Convert.ToChar(edges[j-1]),
                             double.Parse(edges[j], System.Globalization.CultureInfo.InvariantCulture) //replacing separator '.' with ','
@@ -56,9 +56,9 @@ namespace ReadFile
                     //extract data <Town, P(A)>
                     if (j % 2 == 1)
                     {
-                        ReadFromFile.EdgeData.Add(new Tuple<char, double>(
+                        ReadFromFile.GraphData.Add(new Tuple<char, int>(
                             Convert.ToChar(nodes[j - 1]),
-                            Convert.ToDouble(nodes[j])
+                            Convert.ToInt32(nodes[j])
                             ));
                     }
                 }

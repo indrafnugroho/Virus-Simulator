@@ -20,8 +20,11 @@ namespace CoronaSimulation
             //ReadFromFile.GraphData is data which contains Data of Graph
 
             //Init Graph
-            Graph province;
+            Graph province = new Graph();
 
+            for (int i = 0; i < property.nNode; i++) {
+                Town T = new Town(ReadFromFile.GraphData[i].Item2, ReadFromFile.GraphData[i].Item1);                
+            }
 
 
         }
