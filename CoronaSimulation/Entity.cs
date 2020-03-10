@@ -5,7 +5,7 @@ namespace Entity
     public class Town
     {
         const double gamma = 0.25;
-        private int day { get; set; }
+        public int day;
         public char ID;
         private int population { get; set; }
 
@@ -17,25 +17,29 @@ namespace Entity
         }
         public double infectedPopulation(int time)
         { //Logistic Func I
-            return ((double)population / (1 + Math.Pow(Math.Exp(population - 1), (-1) * gamma * time)));
+            return ((double)this.population / (1 + Math.Pow(Math.Exp(this.population - 1), (-1) * gamma * time)));
         }
-        public static double virusSpread(double I, double Tr)
-        { //S
-            return (I * Tr);
+        public static bool IsInfected(Vertex V)
+        {
+            if(V.city.day>=0)
+            {
+                return true;
+            }
+            return false;
         }
     }
     public class Vertex
         {
             public Town city;
-            public Dictionary<char, double> neighbors;
+            public Dictionary<char, Tuple<bool,double>> neighbors;
             public Vertex(Town City)
             {
                 this.city = City;
-                this.neighbors = new Dictionary<char,double> ();
+                this.neighbors = new Dictionary<char, Tuple<bool, double>> ();
             }
             public void addNeighbors(char key, double weight)
             {
-                this.neighbors[key] = weight;
+                this.neighbors[key] = new Tuple<bool, double>(false,weight);
             }
         }
     public class Graph
@@ -78,10 +82,10 @@ namespace Entity
             Dictionary<char,Vertex>.ValueCollection Verteks = this.vertices.Values;
             foreach(Vertex val in Verteks)
             {
-                Dictionary<char, double>.KeyCollection neighbor = val.neighbors.Keys;
+                Dictionary<char, Tuple<bool, double>>.KeyCollection neighbor = val.neighbors.Keys;
                 foreach (char key in neighbor)
                 {
-                    Console.Write($"{val.city.ID}=({val.neighbors[key]})=>{key}");
+                    Console.Write($"{val.city.ID}=({val.neighbors[key].Item2})=>{key}");
                     Console.WriteLine();
                 }
                 Console.WriteLine("Switch");
