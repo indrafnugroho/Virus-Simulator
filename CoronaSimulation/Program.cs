@@ -2,6 +2,7 @@
 using System.Collections;
 using Entity;
 using ReadFile;
+using System.Collections.Generic;
 
 namespace CoronaSimulation
 {
@@ -9,6 +10,9 @@ namespace CoronaSimulation
     {
         public static void Main()
         {
+            ReadFromFile.Read();
+            Queue<Tuple<char, char, double>> qEdge = new Queue<Tuple<char, char, double>>();
+
             Console.Write("Input Total Days Infected: ");
             int time = Convert.ToInt32(Console.ReadLine());
             ReadFromFile.Read();
@@ -16,7 +20,6 @@ namespace CoronaSimulation
             //ReadFromFile.GraphData is data which contains data of Graph
 
             //Init Graph
-
 
         }
     }
