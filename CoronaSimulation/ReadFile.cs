@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 namespace ReadFile
 {
+    static class property
+    {
+        public static int nEdge;
+        public static int nNode;
+        public static char source;
+    }
     class ReadFromFile
     {
-        public static List<Tuple<char,char,double>> GraphData = new List<Tuple<char, char, double>>();
-        public static List<Tuple<char,double>> EdgeData = new List<Tuple<char, double>>();
+        public static List<Tuple<char, char, double>> GraphData = new List<Tuple<char, char, double>>();
+        public static List<Tuple<char, double>> EdgeData = new List<Tuple<char, double>>();
 
         public static void Read()
         {
@@ -15,10 +21,10 @@ namespace ReadFile
             string[] files2 = System.IO.File.ReadAllLines(@"..\..\..\text2.txt");
 
             Console.WriteLine("\nIni adalah File 1");
-            int nEdge = Convert.ToInt32(files1[0]);
-            Console.WriteLine($"ini adalah banyaknya edge : {nEdge}");
+            property.nEdge = Convert.ToInt32(files1[0]);
+            Console.WriteLine($"ini adalah banyaknya edge : {property.nEdge}");
 
-            for (int i = 1; i <= nEdge; i++){
+            for (int i = 1; i <= property.nEdge; i++){
                 string[] edges = files1[i].Split(' ');
                 for (int j = 0; j < edges.Length; j++)
                 {
@@ -37,13 +43,13 @@ namespace ReadFile
 
             Console.WriteLine("\nIni adalah File 2");
             string[] getnNode = files2[0].Split(' ');
-            int nNode = Convert.ToInt32(getnNode[0]);
-            var source = getnNode[1];
+            property.nNode = Convert.ToInt32(getnNode[0]);
+            property.source = char.Parse(getnNode[1]);
 
-            Console.WriteLine($"ini adalah source-nya : {source}");
-            Console.WriteLine($"ini adalah banyaknya node : {nNode}");
+            Console.WriteLine($"ini adalah source-nya : {property.source}");
+            Console.WriteLine($"ini adalah banyaknya node : {property.nNode}");
 
-            for (int i = 1; i <= nNode; i++){
+            for (int i = 1; i <= property.nNode; i++){
                 string[] nodes = files2[i].Split(' ');
                 for (int j = 0; j < nodes.Length; j++)
                 {

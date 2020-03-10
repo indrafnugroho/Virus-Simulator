@@ -17,9 +17,12 @@ namespace CoronaSimulation
             int time = Convert.ToInt32(Console.ReadLine());
             ReadFromFile.Read();
             //ReadFromFile.EdgeData is data which contains Data of Edge
-            //ReadFromFile.GraphData is data which contains data of Graph
+            //ReadFromFile.GraphData is data which contains Data of Graph
 
             //Init Graph
+            Graph province;
+
+
 
         }
     }
