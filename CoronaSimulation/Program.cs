@@ -22,11 +22,20 @@ namespace CoronaSimulation
             //Init Graph
             Graph province = new Graph();
 
-            for (int i = 0; i < property.nNode; i++) {
-                Town T = new Town(ReadFromFile.GraphData[i].Item2, ReadFromFile.GraphData[i].Item1);                
+            // Nanti masukin kelas lain aja, gw buatnya di main
+            for (int i = 0; i < property.nNode; i++) 
+            {
+                Town T = new Town(ReadFromFile.GraphData[i].Item2, ReadFromFile.GraphData[i].Item1);
+                Vertex V = new Vertex(T);
+                for (int j = 0; j < property.nEdge; j++) 
+                {
+                    if (ReadFromFile.EdgeData[i].Item1 == T.ID) 
+                    {
+                        V.addNeighbors(ReadFromFile.EdgeData[i].Item2, ReadFromFile.EdgeData[i].Item3);
+                    }
+                }
+                province.addVertex(V);
             }
-
-
         }
     }
 }
