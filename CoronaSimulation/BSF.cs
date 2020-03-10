@@ -62,5 +62,9 @@ namespace AlgCompute
                 } 
             }
         }
+        public static void printSol()
+        {
+
+        }
     }
 }
