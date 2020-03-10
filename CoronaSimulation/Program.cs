@@ -3,7 +3,7 @@ using System.Collections;
 using Entity;
 using ReadFile;
 using System.Collections.Generic;
-
+using AlgCompute;
 namespace CoronaSimulation
 {
     public class Simulation
@@ -20,11 +20,8 @@ namespace CoronaSimulation
 
             //Init Graph G sudah di ReadFile
             ReadFromFile.province.printGraph();
-
-
-            
-
-
+            BFS.BFSCompute(time,ReadFromFile.source);
+            BFS.printSol(time);
         }
     }
 }

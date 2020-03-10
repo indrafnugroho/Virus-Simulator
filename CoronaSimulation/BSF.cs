@@ -2,6 +2,7 @@
 using Entity;
 using ReadFile;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace AlgCompute
 {
@@ -30,7 +31,7 @@ namespace AlgCompute
             return false;
         }
 
-        public void BFSCompute(int days, char Infected)
+        public static void BFSCompute(int days, char Infected)
         {
             //Declare temp Var
             Tuple<char, char> CurrTuple;
@@ -47,8 +48,7 @@ namespace AlgCompute
                 while (BFS.ProcessQ.Count>0) //while Queue not Empty
                 {
                     CurrTuple = BFS.ProcessQ.Dequeue();//get tuple of <From, To> , "From" is Infected
-
-                    if(BFS.IsInfected(Map.vertices[CurrTuple.Item1],CurrTuple.Item2,i)) //Target Infected
+                    if (BFS.IsInfected(Map.vertices[CurrTuple.Item1],CurrTuple.Item2,i)) //Target Infected
                     {
                         if(!Vertex.IsInfected(Map.vertices[CurrTuple.Item2])) 
                         {
@@ -59,12 +59,45 @@ namespace AlgCompute
                         double temp = Map.vertices[CurrTuple.Item1].neighbors[CurrTuple.Item2].Item2;//temp for Tr
                         Map.vertices[CurrTuple.Item1].neighbors[CurrTuple.Item2] = new Tuple<bool, double>(true,temp);//assign true to its edge, sign of infecting path 
                     }
-                } 
+                }
+                BFS.ProcessQ.Clear();
             }
         }
-        public static void printSol()
+        public static void printSol(int time)
         {
-
+            Graph Map = ReadFromFile.province; //Take Graph fromFile
+            Dictionary<char, Vertex>.ValueCollection Verteks = Map.vertices.Values;
+            ArrayList SolList = new ArrayList();
+            foreach (Vertex val in Verteks)
+            {
+                if (val.city.day >= 0)
+                {
+                    Dictionary<char, Tuple<bool, double>>.KeyCollection neighbor = val.neighbors.Keys;
+                    foreach (char key in neighbor)
+                    {
+                        if(!SolList.Contains(val.city.ID))
+                        {
+                            SolList.Add(val.city.ID);
+                        }
+                        double S = val.city.infectedPopulation(time - val.city.day)* val.neighbors[key].Item2;
+                        Console.Write($"{val.city.ID}=({val.neighbors[key].Item2})=>{key}, S = {S}");
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine("Switch City");
+                }
+            }
+            Console.WriteLine("The City that infected ");
+            for(int i = 0; i < SolList.Count; i++)
+            {
+                if(i==0)
+                {
+                    Console.Write(SolList[i]);
+                }
+                else
+                {
+                    Console.Write($"=>{SolList[i]}");
+                }
+            }
         }
     }
 }

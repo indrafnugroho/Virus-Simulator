@@ -18,7 +18,7 @@ namespace Entity
         }
         public double infectedPopulation(int time) //Compute I, or pupulation infected
         { //Logistic Func I
-            return ((double)this.population / (1 + Math.Pow(Math.Exp(this.population - 1), (-1) * gamma * time)));
+            return ((double)this.population / (1 + (this.population - 1)*Math.Exp((-1) * gamma * time)));
         }
 
     }
@@ -78,9 +78,10 @@ namespace Entity
                     Console.Write($"{val.city.ID}=({val.neighbors[key].Item2})=>{key}");
                     Console.WriteLine();
                 }
-                Console.WriteLine("Switch");
+                Console.WriteLine("Switch City");
             }
+            Console.WriteLine("==================================");
         }
-        
+
     }
 }
