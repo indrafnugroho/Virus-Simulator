@@ -4,67 +4,57 @@ namespace Entity
 {
     public class Town
     {
-        const double gamma = 0.25;
-        public int day;
-        public char ID;
-        private int population { get; set; }
+        const double gamma = 0.25; //gamma constants
 
-        public Town(int p, char ID)
+        public int day; //day the town being infected
+        public char ID; //ID of Infected
+        private int population { get; set; } //population of the Town
+
+        public Town(int p, char ID) //constructor
         {
             this.day = -1;
             this.population = p;
             this.ID = ID;
         }
-        public double infectedPopulation(int time)
+        public double infectedPopulation(int time) //Compute I, or pupulation infected
         { //Logistic Func I
             return ((double)this.population / (1 + Math.Pow(Math.Exp(this.population - 1), (-1) * gamma * time)));
         }
-        public static bool IsInfected(Vertex V)
-        {
-            if(V.city.day>=0)
-            {
-                return true;
-            }
-            return false;
-        }
+
     }
     public class Vertex
         {
             public Town city;
-            public Dictionary<char, Tuple<bool,double>> neighbors;
-            public Vertex(Town City)
+            public Dictionary<char, Tuple<bool,double>> neighbors; //neighbors (key = name, value = (isInfectingPath,Tr))
+            public Vertex(Town City)//Constructor
             {
                 this.city = City;
                 this.neighbors = new Dictionary<char, Tuple<bool, double>> ();
             }
             public void addNeighbors(char key, double weight)
             {
-                this.neighbors[key] = new Tuple<bool, double>(false,weight);
+                this.neighbors[key] = new Tuple<bool, double>(false,weight);//add neighbors and set infecting path to false
             }
-        }
+            public static bool IsInfected(Vertex V) //is the Town infected
+            {
+                if (V.city.day >= 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+    }
     public class Graph
     {
-        public Dictionary<char, Vertex> vertices;
+        public Dictionary<char, Vertex> vertices; // Vertices (key = name, value = Vertex)
 
-        public Graph()
+        public Graph() //Constructor
         {
             this.vertices = new Dictionary<char, Vertex>();
         }
-        public void addVertex(Vertex V)
+        public void addVertex(Vertex V) //AddVertex to Graph
         {
             this.vertices[V.city.ID] = V;
-        }
-        public Vertex GetVertex(char key)
-        {
-            if (this.vertices.ContainsKey(key))
-            {
-                return this.vertices[key];
-            }
-            else
-            {
-                Console.WriteLine("Not Found");
-            }
-            return null;
         }
         public void addEdge (char key, char ID, double weight) 
         {
