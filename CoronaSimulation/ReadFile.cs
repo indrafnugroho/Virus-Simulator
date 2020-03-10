@@ -46,7 +46,7 @@ namespace ReadFile
             source = char.Parse(getnNode[1]);
 
             Console.WriteLine($"ini adalah source-nya : {source}");
-            Console.WriteLine($"ini adalah banyaknya node : {nNode}");
+            Console.WriteLine($"ini adalah banyaknya node : {nNode} \n");
 
             for (int i = 1; i <= nNode; i++){
                 string[] nodes = files2[i].Split(' ');

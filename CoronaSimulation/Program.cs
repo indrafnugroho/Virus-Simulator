@@ -15,11 +15,12 @@ namespace CoronaSimulation
 
             Console.Write("Input Total Days Infected: ");
             int time = Convert.ToInt32(Console.ReadLine());
-            ReadFromFile.Read();
             //ReadFromFile.EdgeData is data which contains Data of Edge
             //ReadFromFile.GraphData is data which contains Data of Graph
 
-            //Init Graph
+            //Init Graph G sudah di ReadFile
+            
+
 
         }
     }
