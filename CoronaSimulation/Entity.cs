@@ -8,13 +8,11 @@ namespace Entity
         private int day { get; set; }
         public char ID;
         private int population { get; set; }
-        public bool isInfected;
 
         public Town(int p, char ID)
         {
-            this.day = 0;
+            this.day = -1;
             this.population = p;
-            this.isInfected = false;
             this.ID = ID;
         }
         public double infectedPopulation(int time)
@@ -75,5 +73,20 @@ namespace Entity
                 Console.WriteLine("Error Not Found");
             }
         }
+        public void printGraph()
+        {
+            Dictionary<char,Vertex>.ValueCollection Verteks = this.vertices.Values;
+            foreach(Vertex val in Verteks)
+            {
+                Dictionary<char, double>.KeyCollection neighbor = val.neighbors.Keys;
+                foreach (char key in neighbor)
+                {
+                    Console.Write($"{val.city.ID}=({val.neighbors[key]})=>{key}");
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Switch");
+            }
+        }
+        
     }
 }

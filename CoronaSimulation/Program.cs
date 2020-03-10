@@ -11,7 +11,7 @@ namespace CoronaSimulation
         public static void Main()
         {
             ReadFromFile.Read();
-            Queue<Tuple<char, char, double>> qEdge = new Queue<Tuple<char, char, double>>();
+            Queue<char> QueueEdge = new Queue<char>();
 
             Console.Write("Input Total Days Infected: ");
             int time = Convert.ToInt32(Console.ReadLine());
@@ -19,6 +19,9 @@ namespace CoronaSimulation
             //ReadFromFile.GraphData is data which contains Data of Graph
 
             //Init Graph G sudah di ReadFile
+            ReadFromFile.province.printGraph();
+
+
             
 
 

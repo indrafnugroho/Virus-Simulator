@@ -71,9 +71,9 @@ namespace ReadFile
                 Vertex V = new Vertex(T);
                 for (int j = 0; j < ReadFromFile.nEdge; j++)
                 {
-                    if (ReadFromFile.EdgeData[i].Item1 == T.ID)
+                    if (ReadFromFile.EdgeData[j].Item1 == T.ID)
                     {
-                        V.addNeighbors(ReadFromFile.EdgeData[i].Item2, ReadFromFile.EdgeData[i].Item3);
+                        V.addNeighbors(ReadFromFile.EdgeData[j].Item2, ReadFromFile.EdgeData[j].Item3);
                     }
                 }
                 province.addVertex(V);
