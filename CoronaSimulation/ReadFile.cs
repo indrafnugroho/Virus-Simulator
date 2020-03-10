@@ -1,17 +1,16 @@
 ﻿using System;
+using Entity;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace ReadFile
 {
-    static class property
+    class ReadFromFile
     {
         public static int nEdge;
         public static int nNode;
         public static char source;
-    }
-    class ReadFromFile
-    {
+        public static Graph province;
         public static List<Tuple<char, char, double>> EdgeData = new List<Tuple<char, char, double>>();
         public static List<Tuple<char, int>> GraphData = new List<Tuple<char, int>>();
 
@@ -21,10 +20,10 @@ namespace ReadFile
             string[] files2 = System.IO.File.ReadAllLines(@"..\..\..\text2.txt");
 
             Console.WriteLine("\nIni adalah File 1");
-            property.nEdge = Convert.ToInt32(files1[0]);
-            Console.WriteLine($"ini adalah banyaknya edge : {property.nEdge}");
+            nEdge = Convert.ToInt32(files1[0]);
+            Console.WriteLine($"ini adalah banyaknya edge : {nEdge}");
 
-            for (int i = 1; i <= property.nEdge; i++){
+            for (int i = 1; i <= nEdge; i++){
                 string[] edges = files1[i].Split(' ');
                 for (int j = 0; j < edges.Length; j++)
                 {
@@ -43,13 +42,13 @@ namespace ReadFile
 
             Console.WriteLine("\nIni adalah File 2");
             string[] getnNode = files2[0].Split(' ');
-            property.nNode = Convert.ToInt32(getnNode[0]);
-            property.source = char.Parse(getnNode[1]);
+            nNode = Convert.ToInt32(getnNode[0]);
+            source = char.Parse(getnNode[1]);
 
-            Console.WriteLine($"ini adalah source-nya : {property.source}");
-            Console.WriteLine($"ini adalah banyaknya node : {property.nNode}");
+            Console.WriteLine($"ini adalah source-nya : {source}");
+            Console.WriteLine($"ini adalah banyaknya node : {nNode}");
 
-            for (int i = 1; i <= property.nNode; i++){
+            for (int i = 1; i <= nNode; i++){
                 string[] nodes = files2[i].Split(' ');
                 for (int j = 0; j < nodes.Length; j++)
                 {
@@ -63,6 +62,24 @@ namespace ReadFile
                     }
                 }
             }
+
+            ReadFromFile.province = new Graph();
+
+            for (int i = 0; i < ReadFromFile.nNode; i++)
+            {
+                Town T = new Town(ReadFromFile.GraphData[i].Item2, ReadFromFile.GraphData[i].Item1);
+                Vertex V = new Vertex(T);
+                for (int j = 0; j < ReadFromFile.nEdge; j++)
+                {
+                    if (ReadFromFile.EdgeData[i].Item1 == T.ID)
+                    {
+                        V.addNeighbors(ReadFromFile.EdgeData[i].Item2, ReadFromFile.EdgeData[i].Item3);
+                    }
+                }
+                province.addVertex(V);
+            }
+
+
         }
     }
 }
