@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AlgCompute;
 
 
 namespace CoronaApp
@@ -18,6 +19,7 @@ namespace CoronaApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new CoronaGUI());
+            BFS.printSol(200);
         }
     }
 }
