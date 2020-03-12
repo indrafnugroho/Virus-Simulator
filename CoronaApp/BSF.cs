@@ -8,6 +8,7 @@ namespace AlgCompute
 {
     public class BFS
     {
+        public static Graph Map;
         static Queue<Tuple<char,char>> ProcessQ= new Queue<Tuple<char,char>>(); //Queue <From, To>(City) that will processed
 
         public static void addAdjToQueue(Vertex V) //add all candidate Tuple to Queue

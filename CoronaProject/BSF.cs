@@ -6,6 +6,7 @@ using System.Collections;
 
 namespace AlgCompute
 {
+    public static Graph Map;
     public class BFS
     {
         static Queue<Tuple<char,char>> ProcessQ= new Queue<Tuple<char,char>>(); //Queue <From, To>(City) that will processed
@@ -36,7 +37,7 @@ namespace AlgCompute
             //Declare temp Var
             Tuple<char, char> CurrTuple;
 
-            Graph Map = ReadFromFile.province; //Take Graph fromFile
+            Map = ReadFromFile.province; //Take Graph fromFile
             //init status
             Map.vertices[Infected].city.day = 0;
 
@@ -86,6 +87,7 @@ namespace AlgCompute
                     Console.WriteLine("Switch City");
                 }
             }
+
             Console.WriteLine("The City that infected ");
             for(int i = 0; i < SolList.Count; i++)
             {

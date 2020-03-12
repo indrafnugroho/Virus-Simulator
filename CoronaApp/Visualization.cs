@@ -1,28 +1,46 @@
 ﻿using System;
+using ReadFile;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AlgCompute;
+using Entity;
 
 namespace Visualization
 {
     public class Visualisasi
     {
+        public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
+        public static Microsoft.Msagl.Drawing.Graph graph;
+
         public static void Visual()
         {
+            Graph Map = ReadFromFile.province;
             //create a form 
             System.Windows.Forms.Form form = new System.Windows.Forms.Form();
             //create a viewer object 
-            Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             //create a graph object 
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
             //create the graph content 
-            graph.AddEdge("A", "B");
-            graph.AddEdge("B", "C");
-            graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-            graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-            graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
-            Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
-            c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
-            c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
+
+            for (int i = 0; i < ReadFromFile.nEdge; i++) {
+                graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1), Char.ToString(ReadFromFile.EdgeData[i].Item2));
+            }
+
+            //for (int i = 0; i < ReadFromFile.nNode; i++) {
+            //   if (BFS.Map.vertices[vertices.Keys.ElementAt(i)].neighbors.Keys.ElementAt(i)) {
+            //       graph.FindNode(char.ToString(BFS.Map.vertices.Keys.ElementAt(i))).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+            //   }
+            //}
+
+            foreach (KeyValuePair<char, Vertex> item in Map.vertices) {
+                if (item.Value.city.day != -1) {
+                    graph.FindNode(char.ToString(item.Key)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+                }
+            }
+
+
+
             //bind the graph to the viewer 
             viewer.Graph = graph;
             //associate the viewer with the form 

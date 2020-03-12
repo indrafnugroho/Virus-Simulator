@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entity;
 using Visualization;
-using Cobavisual;
 using ReadFile;
 using AlgCompute;
 
@@ -54,8 +53,13 @@ namespace CoronaApp
             ReadFromFile.province.printGraph();
             BFS.BFSCompute(daysInfected, ReadFromFile.source);
             BFS.printSol(daysInfected);
-            cobavisualisasi.Visualisasi();
+            Visualisasi.Visual();
         }
 
+        private void CoronaGUI_Load(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Visualisasi.graph;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
     }
 }

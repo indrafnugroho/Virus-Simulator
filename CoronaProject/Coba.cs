@@ -14,9 +14,15 @@ namespace Cobavisual {
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
             //create the graph content 
 
-            for (int i = 0; i < ReadFromFile.nEdge; i++) {
-                graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1), Char.ToString(ReadFromFile.EdgeData[i].Item2)); 
-            }
+            //for (int i = 0; i < ReadFromFile.nEdge; i++) {
+            //    graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1), Char.ToString(ReadFromFile.EdgeData[i].Item2));
+            //}
+
+            //for (int i = 0; i < ReadFromFile.nNode; i++) {
+            //    if (BFS.Map.vertices[vertices.Keys.ElementAt(i)].neighbors.Keys.ElementAt(i)) {
+            //        graph.FindNode(BFS.Map.vertices.Keys.ElementAt(i)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+            //    }
+            //}
 
             //bind the graph to the viewer 
             viewer.Graph = graph;
