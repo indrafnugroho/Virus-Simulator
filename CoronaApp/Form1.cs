@@ -43,7 +43,7 @@ namespace CoronaApp
         private void button1_Click(object sender, EventArgs e)
         {
             daysInfected = int.Parse(textBox1.Text);
-            label2.Text = "Current days: " + daysInfected.ToString();
+            label2.Text = "Current\ndays: " + daysInfected.ToString();
 
             ReadFromFile.Read();
             Queue<char> QueueEdge = new Queue<char>();
@@ -78,7 +78,7 @@ namespace CoronaApp
         private void button2_Click(object sender, EventArgs e)
         {
             daysInfected++;
-            label2.Text = "Current days: " + daysInfected.ToString();
+            label2.Text = "Current\ndays: " + daysInfected.ToString();
             ReadFromFile.Read();
             Queue<char> QueueEdge = new Queue<char>();
 
@@ -103,7 +103,7 @@ namespace CoronaApp
             if (daysInfected > 0)
             {
                 daysInfected--;
-                label2.Text = "Current days: " + daysInfected.ToString();
+                label2.Text = "Current\ndays: " + daysInfected.ToString();
                 ReadFromFile.Read();
                 Queue<char> QueueEdge = new Queue<char>();
 

@@ -12,7 +12,7 @@ namespace Visualization
     public class Visualisasi
     {
         public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
-        public static Microsoft.Msagl.Drawing.Graph graph;
+        //public static Microsoft.Msagl.Drawing.Graph graph;
 
         public static void Visual()
         {
