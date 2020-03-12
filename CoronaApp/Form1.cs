@@ -18,6 +18,7 @@ namespace CoronaApp
     public partial class CoronaGUI : Form
     {
         public static int daysInfected;
+        public static bool isButtonClicked = false;
         public CoronaGUI()
         {
             InitializeComponent();
@@ -50,16 +51,27 @@ namespace CoronaApp
             //ReadFromFile.EdgeData is data which contains Data of Edge
             //ReadFromFile.GraphData is data which contains Data of Graph
 
+            if (isButtonClicked)
+            {
+                this.Controls.Remove(Visualisasi.viewer);
+            }
             //Init Graph G sudah di ReadFile
             ReadFromFile.province.printGraph();
             BFS.BFSCompute(daysInfected, ReadFromFile.source);
             BFS.printSol(daysInfected);
             Visualisasi.Visual();
+            
+            //associate the viewer with the GUI 
+            this.SuspendLayout();
+            this.Controls.Add(Visualisasi.viewer);
+            this.ResumeLayout();
+            isButtonClicked = true;
+            
         }
 
         private void CoronaGUI_Load(object sender, EventArgs e)
         {
-            this.Controls.Add(Visualisasi.viewer);
+            //this.Controls.Add(Visualisasi.viewer);
 
         }
 
@@ -73,11 +85,17 @@ namespace CoronaApp
             //ReadFromFile.EdgeData is data which contains Data of Edge
             //ReadFromFile.GraphData is data which contains Data of Graph
 
+            this.Controls.Remove(Visualisasi.viewer);
             //Init Graph G sudah di ReadFile
             ReadFromFile.province.printGraph();
             BFS.BFSCompute(daysInfected, ReadFromFile.source);
             BFS.printSol(daysInfected);
             Visualisasi.Visual();
+
+            //associate the viewer with the GUI 
+            this.SuspendLayout();
+            this.Controls.Add(Visualisasi.viewer);
+            this.ResumeLayout();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -92,11 +110,17 @@ namespace CoronaApp
                 //ReadFromFile.EdgeData is data which contains Data of Edge
                 //ReadFromFile.GraphData is data which contains Data of Graph
 
+                this.Controls.Remove(Visualisasi.viewer);
                 //Init Graph G sudah di ReadFile
                 ReadFromFile.province.printGraph();
                 BFS.BFSCompute(daysInfected, ReadFromFile.source);
                 BFS.printSol(daysInfected);
                 Visualisasi.Visual();
+                
+                //associate the viewer with the GUI 
+                this.SuspendLayout();
+                this.Controls.Add(Visualisasi.viewer);
+                this.ResumeLayout();
             }
         }
     }
