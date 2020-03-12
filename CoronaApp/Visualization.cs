@@ -51,14 +51,7 @@ namespace Visualization
 
             //bind the graph to the viewer 
             viewer.Graph = graph;
-            //associate the viewer with the form 
-            form.SuspendLayout();
             viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            form.Controls.Add(viewer);
-            form.ResumeLayout();
-            //show the form 
-            form.ShowDialog();
-
         }
     }
 }
