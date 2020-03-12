@@ -17,6 +17,7 @@ namespace CoronaApp
 {
     public partial class CoronaGUI : Form
     {
+        public static int daysInfected;
         public CoronaGUI()
         {
             InitializeComponent();
@@ -40,8 +41,8 @@ namespace CoronaApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int daysInfected;
             daysInfected = int.Parse(textBox1.Text);
+            label2.Text = "Current days: " + daysInfected.ToString();
 
             ReadFromFile.Read();
             Queue<char> QueueEdge = new Queue<char>();
@@ -58,8 +59,45 @@ namespace CoronaApp
 
         private void CoronaGUI_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Visualisasi.graph;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(Visualisasi.viewer);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            daysInfected++;
+            label2.Text = "Current days: " + daysInfected.ToString();
+            ReadFromFile.Read();
+            Queue<char> QueueEdge = new Queue<char>();
+
+            //ReadFromFile.EdgeData is data which contains Data of Edge
+            //ReadFromFile.GraphData is data which contains Data of Graph
+
+            //Init Graph G sudah di ReadFile
+            ReadFromFile.province.printGraph();
+            BFS.BFSCompute(daysInfected, ReadFromFile.source);
+            BFS.printSol(daysInfected);
+            Visualisasi.Visual();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (daysInfected > 0)
+            {
+                daysInfected--;
+                label2.Text = "Current days: " + daysInfected.ToString();
+                ReadFromFile.Read();
+                Queue<char> QueueEdge = new Queue<char>();
+
+                //ReadFromFile.EdgeData is data which contains Data of Edge
+                //ReadFromFile.GraphData is data which contains Data of Graph
+
+                //Init Graph G sudah di ReadFile
+                ReadFromFile.province.printGraph();
+                BFS.BFSCompute(daysInfected, ReadFromFile.source);
+                BFS.printSol(daysInfected);
+                Visualisasi.Visual();
+            }
         }
     }
 }
