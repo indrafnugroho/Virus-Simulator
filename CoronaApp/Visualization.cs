@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using AlgCompute;
 using Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Visualization
 {
@@ -39,7 +41,13 @@ namespace Visualization
                 }
             }
 
-
+            Microsoft.Msagl.GraphViewerGdi.GraphRenderer renderer = new Microsoft.Msagl.GraphViewerGdi.GraphRenderer(graph);
+            renderer.CalculateLayout();
+            int width = 50;
+            Bitmap bitmap = new Bitmap(width, (int)(graph.Height * (width / graph.Width)), PixelFormat.Format32bppPArgb);
+            renderer.Render(bitmap);
+            bitmap.Save("test.JPG");
+            graph.Write("Fauzan.jpg");
 
             //bind the graph to the viewer 
             viewer.Graph = graph;
@@ -50,6 +58,7 @@ namespace Visualization
             form.ResumeLayout();
             //show the form 
             form.ShowDialog();
+
         }
     }
 }
