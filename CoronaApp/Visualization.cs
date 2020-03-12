@@ -27,6 +27,7 @@ namespace Visualization
 
             for (int i = 0; i < ReadFromFile.nEdge; i++) {
                 graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1), Char.ToString(ReadFromFile.EdgeData[i].Item2));
+                graph.FindNode(Char.ToString(ReadFromFile.EdgeData[i].Item1)).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
             }
 
             //for (int i = 0; i < ReadFromFile.nNode; i++) {
@@ -40,14 +41,6 @@ namespace Visualization
                     graph.FindNode(char.ToString(item.Key)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
                 }
             }
-
-            Microsoft.Msagl.GraphViewerGdi.GraphRenderer renderer = new Microsoft.Msagl.GraphViewerGdi.GraphRenderer(graph);
-            renderer.CalculateLayout();
-            int width = 50;
-            Bitmap bitmap = new Bitmap(width, (int)(graph.Height * (width / graph.Width)), PixelFormat.Format32bppPArgb);
-            renderer.Render(bitmap);
-            bitmap.Save("test.JPG");
-            graph.Write("Fauzan.jpg");
 
             //bind the graph to the viewer 
             viewer.Graph = graph;
