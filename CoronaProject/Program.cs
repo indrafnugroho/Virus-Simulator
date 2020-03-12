@@ -25,8 +25,9 @@ namespace CoronaProject
             ReadFromFile.province.printGraph();
             BFS.BFSCompute(time,ReadFromFile.source);
             BFS.printSol(time);
-            cobavisualisasi.Visualisasi();
-            
+
+            int ppp = Convert.ToInt32(Console.ReadLine());
+
         }
     }
 }
