@@ -17,6 +17,7 @@ namespace AlgCompute
             char From = V.city.ID; //From City
             foreach(char To in Target)
             {
+                //Console.WriteLine($"Added to Queue = {From},{To}");
                 BFS.ProcessQ.Enqueue(new Tuple<char, char>(From,To)); //add <From, To>(Queue) to Queue
             }
         }
@@ -25,6 +26,7 @@ namespace AlgCompute
         {
             double I = V.city.infectedPopulation(currentTime - V.city.day); //Calculate I
             double S = I * V.neighbors[to].Item2;//I * Tr(From, to) From = V.city.ID
+            Console.WriteLine(S);
             if(S>1) //Infected
             {
                 return true;
@@ -44,17 +46,25 @@ namespace AlgCompute
             for(int i = 1; i <= days; i++) //i represent day Status
             {
                 //init Queue
+                ArrayList visited = new ArrayList();
                 BFS.addAdjToQueue(Map.vertices[Infected]); //Queue must be initialized each enumeration
+                visited.Add(Infected);
                 //BFS
                 while (BFS.ProcessQ.Count>0) //while Queue not Empty
                 {
                     CurrTuple = BFS.ProcessQ.Dequeue();//get tuple of <From, To> , "From" is Infected
+                    Console.WriteLine(i);
+                    Console.WriteLine($"Queue processed : {CurrTuple.Item1},{CurrTuple.Item2}");
                     if (BFS.IsInfected(Map.vertices[CurrTuple.Item1],CurrTuple.Item2,i)) //Target Infected
                     {
                         if(!Vertex.IsInfected(Map.vertices[CurrTuple.Item2])) 
                         {
-                            BFS.addAdjToQueue(Map.vertices[CurrTuple.Item2]); //add new Path to Queue
                             Map.vertices[CurrTuple.Item2].city.day = i; //Assign the Day that its get Infected
+                        }
+                        if (!visited.Contains(CurrTuple.Item2))
+                        {
+                            BFS.addAdjToQueue(Map.vertices[CurrTuple.Item2]); //add new Path to Queue
+                            visited.Add(CurrTuple.Item2);
                         }
                         //if the city is already Infected, its path never processed again
                         double temp = Map.vertices[CurrTuple.Item1].neighbors[CurrTuple.Item2].Item2;//temp for Tr
@@ -81,7 +91,7 @@ namespace AlgCompute
                             SolList.Add(val.city.ID);
                         }
                         double S = val.city.infectedPopulation(time - val.city.day)* val.neighbors[key].Item2;
-                        Console.Write($"{val.city.ID}=({val.neighbors[key].Item2})=>{key}, S = {S}");
+                        Console.Write($"{val.city.ID},{val.city.infectedPopulation(time-val.city.day)}=({val.neighbors[key].Item2})=>{key}, S = {S}");
                         Console.WriteLine();
                     }
                     Console.WriteLine("Switch City");

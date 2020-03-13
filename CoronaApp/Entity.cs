@@ -19,6 +19,10 @@ namespace Entity
         }
         public double infectedPopulation(int time) //Compute I, or pupulation infected
         { //Logistic Func I
+            if(this.day == -1)
+            {
+                return 0;
+            }
             return ((double)this.population / (1 + (this.population - 1)*Math.Exp((-1) * gamma * time)));
         }
 

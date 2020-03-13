@@ -8,7 +8,7 @@ namespace Entity
 
         public int day; //day the town being infected
         public char ID; //ID of Infected
-        private int population { get; set; } //population of the Town
+        public int population { get; set; } //population of the Town
 
         public Town(int p, char ID) //constructor
         {
@@ -18,7 +18,11 @@ namespace Entity
         }
         public double infectedPopulation(int time) //Compute I, or pupulation infected
         { //Logistic Func I
-            return ((double)this.population / (1 + (this.population - 1)*Math.Exp((-1) * gamma * time)));
+            if(this.day == -1)
+            {
+                return 0;
+            }
+            return ((double)this.population / (1 + (this.population - 1)*Math.Exp((-1) * 0.25 * (time - this.day))));
         }
 
     }

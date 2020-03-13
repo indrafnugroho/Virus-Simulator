@@ -6,6 +6,7 @@ using AlgCompute;
 using Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
+using CoronaApp;
 
 namespace Visualization
 {
@@ -42,7 +43,7 @@ namespace Visualization
                 {
                     if (tetangga.Value.Item1)
                     {
-                        graph.AddEdge(Char.ToString(item.Key), Char.ToString(tetangga.Key)).Attr.Color = Microsoft.Msagl.Drawing.Color.Magenta;
+                        graph.AddEdge(Char.ToString(item.Key), Char.ToString(tetangga.Key)).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
                         var input = Tuple.Create(item.Key, tetangga.Key);
                         busur.Add(input);
                     }
@@ -51,17 +52,15 @@ namespace Visualization
 
             for (int i = 0; i < ReadFromFile.nEdge; i++) {
                 var input = Tuple.Create(ReadFromFile.EdgeData[i].Item1, ReadFromFile.EdgeData[i].Item2);
-                //var tambah = busur.FindAll(x => x == input);
+                
                 int cari = Search(busur, input);
-                if (cari == 0) {
-                    graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1), Char.ToString(ReadFromFile.EdgeData[i].Item2));
-                }
-                graph.FindNode(Char.ToString(ReadFromFile.EdgeData[i].Item1)).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                graph.AddEdge(Char.ToString(ReadFromFile.EdgeData[i].Item1) + "\n"+(int)Map.vertices[ReadFromFile.EdgeData[i].Item1].city.infectedPopulation(CoronaGUI.daysInfected), Char.ToString(ReadFromFile.EdgeData[i].Item2) + "\n"+(int)Map.vertices[ReadFromFile.EdgeData[i].Item2].city.infectedPopulation(CoronaGUI.daysInfected));
+                //graph.FindNode(Char.ToString(ReadFromFile.EdgeData[i].Item1) +"\n" +(int)Map.vertices[ReadFromFile.EdgeData[i].Item1].city.infectedPopulation(CoronaGUI.daysInfected)).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
             }
 
             foreach (KeyValuePair<char, Vertex> item in Map.vertices) {
                 if (item.Value.city.day != -1) {
-                    graph.FindNode(char.ToString(item.Key)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+                    graph.FindNode(char.ToString(item.Key) +"\n"+(int) Map.vertices[item.Key].city.infectedPopulation(CoronaGUI.daysInfected)).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
                 }
             }
 
