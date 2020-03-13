@@ -19,9 +19,9 @@ namespace ReadFile
             string[] files1 = System.IO.File.ReadAllLines(@"..\..\text1.txt");
             string[] files2 = System.IO.File.ReadAllLines(@"..\..\text2.txt");
 
-            Console.WriteLine("\nIni adalah File 1");
+            
             nEdge = Convert.ToInt32(files1[0]);
-            Console.WriteLine($"ini adalah banyaknya edge : {nEdge}");
+            
 
             for (int i = 1; i <= nEdge; i++){
                 string[] edges = files1[i].Split(' ');
@@ -39,14 +39,9 @@ namespace ReadFile
                 }
             }
 
-
-            Console.WriteLine("\nIni adalah File 2");
             string[] getnNode = files2[0].Split(' ');
             nNode = Convert.ToInt32(getnNode[0]);
             source = char.Parse(getnNode[1]);
-
-            Console.WriteLine($"ini adalah source-nya : {source}");
-            Console.WriteLine($"ini adalah banyaknya node : {nNode} \n");
 
             for (int i = 1; i <= nNode; i++){
                 string[] nodes = files2[i].Split(' ');

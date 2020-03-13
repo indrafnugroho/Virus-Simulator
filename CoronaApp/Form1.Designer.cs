@@ -74,7 +74,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(178, 417);
+            this.button2.Location = new System.Drawing.Point(168, 471);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 62);
             this.button2.TabIndex = 4;
@@ -85,7 +85,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(103, 417);
+            this.button3.Location = new System.Drawing.Point(93, 471);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(60, 62);
             this.button3.TabIndex = 5;
@@ -97,7 +97,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Impact", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(105, 308);
+            this.label2.Location = new System.Drawing.Point(95, 362);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 88);
