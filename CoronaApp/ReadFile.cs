@@ -16,8 +16,8 @@ namespace ReadFile
 
         public static void Read()
         {
-            string[] files1 = System.IO.File.ReadAllLines(@"..\..\text1.txt");
-            string[] files2 = System.IO.File.ReadAllLines(@"..\..\text2.txt");
+            string[] files1 = System.IO.File.ReadAllLines("text1.txt");
+            string[] files2 = System.IO.File.ReadAllLines("text2.txt");
 
             
             nEdge = Convert.ToInt32(files1[0]);
